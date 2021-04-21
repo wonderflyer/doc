@@ -1,0 +1,64 @@
+@startuml
+
+object user_info {
+    user_id
+    name
+    email
+    password
+}
+
+object user_address {
+    user_id
+    name
+    email
+    password
+}
+
+object order_info {
+    id
+}
+
+object goods_info {
+    id
+}
+
+object goods_favorite {
+    id
+}
+
+object category {
+    id
+}
+
+object channel {
+    id
+}
+
+object country {
+    id
+}
+
+object city {
+    id
+}
+
+object attribute {
+    id
+}
+
+object cart {
+    id
+}
+
+object exchange {
+    id
+}
+
+user_info .. user_address : 1:N
+country .. city : 1:N
+channel .. category : 1:N
+
+user_info .. order_info
+order_info .. goods_info
+
+@enduml
