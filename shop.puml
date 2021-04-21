@@ -8,10 +8,11 @@ object user_info {
 }
 
 object user_address {
+    id
     user_id
-    name
-    email
-    password
+    city_id
+    phone
+    address
 }
 
 object order_info {
@@ -20,10 +21,16 @@ object order_info {
 
 object goods_info {
     id
+    goods_sn
+    goods_description
+    goods_image
+    status
 }
 
 object goods_favorite {
     id
+    user_id
+    goods_id
 }
 
 object category {
@@ -36,14 +43,20 @@ object channel {
 
 object country {
     id
+    code
+    name
+}
+
+object province {
+    id
+    code
+    name
 }
 
 object city {
     id
-}
-
-object attribute {
-    id
+    name
+    code
 }
 
 object cart {
@@ -55,7 +68,8 @@ object exchange {
 }
 
 user_info .. user_address : 1:N
-country .. city : 1:N
+country .. province : 1:N
+province .. city : 1:N
 channel .. category : 1:N
 
 user_info .. order_info
