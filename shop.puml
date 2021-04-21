@@ -7,6 +7,26 @@ object user_info {
     name
     email
     password
+    sex
+    phone
+    source
+    country_id
+}
+
+object country {
+    id
+    country_code
+    country_name
+    national_flag
+    status
+}
+
+user_info .. country: 1:1
+
+object user_extra {
+    user_id
+    is_mail_subscribe
+    os_open_push
 }
 }
 
@@ -22,22 +42,22 @@ object user_address {
 }
 
 frame 订单 {
-object order_info {
-    id
-    user_id
-    pay_status
-    ship_status
-    price_info
-    marketing_info
-    payment_info
-}
+	object order_info {
+		id
+		user_id
+		pay_status
+		ship_status
+		price_info
+		marketing_info
+		payment_info
+	}
 
-object order_goods {
-    id
-    order_id
-    user_id
-    goods_id
-}
+	object order_goods {
+		id
+		order_id
+		user_id
+		goods_id
+	}
 }
 
 frame 商品{
@@ -81,7 +101,6 @@ object channel {
     meta_info
 }
 }
-
 
 frame 地址库{
 object country {
@@ -133,6 +152,7 @@ frame 评论 {
 
 
 user_info .. user_address : 1:N
+user_info .. user_extra: 1:1
 country .. province : 1:N
 province .. city : 1:N
 user_address .. city : 1:1
