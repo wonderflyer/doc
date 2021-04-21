@@ -1,12 +1,17 @@
 @startuml
 
+
+frame 用户信息 {
 object user_info {
     user_id
     name
     email
     password
 }
+}
 
+
+frame 收件地址{
 object user_address {
     id
     user_id
@@ -14,33 +19,71 @@ object user_address {
     phone
     address
 }
+}
 
+frame 订单 {
 object order_info {
     id
+    user_id
+    pay_status
+    ship_status
+    price_info
+    marketing_info
+    payment_info
 }
 
-object goods_info {
+object order_goods {
     id
+    order_id
+    user_id
+    goods_id
+}
+}
+
+frame 商品{
+object goods_info {
+    goods_id
     goods_sn
-    goods_description
+    goods_info
     goods_image
+    remain_count
     status
 }
+}
 
+frame 商品收藏{
 object goods_favorite {
     id
     user_id
     goods_id
 }
+}
 
+frame 用户反馈{
+object user_feedback {
+    id
+    user_id
+    order_id
+    content
+}
+}
+
+frame 类目 {
 object category {
     id
+    parrent_id
+    category_info
 }
 
 object channel {
     id
+    code
+    meta_info
+}
 }
 
+
+frame 地址库{
 object country {
     id
     code
@@ -58,21 +101,59 @@ object city {
     name
     code
 }
-
-object cart {
-    id
 }
 
+
+frame 购物车{
+object shopping_cart {
+    id
+    user_id
+    goods_id
+    goods_num
+}
+}
+
+frame 汇率{
 object exchange {
     id
+    code
+    rate
 }
+}
+
+frame 评论 {
+    object comment {
+        comment_id
+        user_id
+        goods_id
+        content
+        status
+    }
+}
+
 
 user_info .. user_address : 1:N
 country .. province : 1:N
 province .. city : 1:N
-channel .. category : 1:N
+user_address .. city : 1:1
 
-user_info .. order_info
-order_info .. goods_info
+user_info .. comment : 1:N
+goods_info .. comment : 1:1
+
+user_info .. goods_favorite : 1:N
+goods_info .. goods_favorite : 1:1
+
+user_info .. shopping_cart : 1:N
+shopping_cart .. goods_info : 1:1
+
+user_info .. user_feedback : 1:1
+order_info .. user_feedback : 1:1
+
+channel .. category : 1:N
+category .. category
+
+user_info .. order_info : 1:N
+order_info .. order_goods : 1:N
+order_goods .. goods_info : 1:1
 
 @enduml
