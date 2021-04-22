@@ -49,6 +49,7 @@ frame 订单 {
 		price_info
 		marketing_info
 		payment_info
+		pay_code
 	}
 
 	object order_goods {
