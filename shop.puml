@@ -13,15 +13,7 @@ object user_info {
     country_id
 }
 
-object country {
-    id
-    country_code
-    country_name
-    national_flag
-    status
-}
 
-user_info .. country: 1:1
 
 object user_extra {
     user_id
@@ -30,6 +22,13 @@ object user_extra {
 }
 }
 
+frame 用户反馈{
+object user_feedback {
+    id
+    user_id
+    content
+}
+}
 
 frame 收件地址{
 object user_address {
@@ -79,19 +78,12 @@ object goods_favorite {
 }
 }
 
-frame 用户反馈{
-object user_feedback {
-    id
-    user_id
-    order_id
-    content
-}
-}
 
 frame 类目 {
 object category {
     id
-    parrent_id
+    parent_id
+    child_id
     category_info
 }
 
@@ -105,9 +97,13 @@ object channel {
 frame 地址库{
 object country {
     id
-    code
-    name
+    country_code
+    country_name
+    national_flag
+    status
 }
+
+user_info .. country: 1:1
 
 object province {
     id
@@ -129,14 +125,6 @@ object shopping_cart {
     user_id
     goods_id
     goods_num
-}
-}
-
-frame 汇率{
-object exchange {
-    id
-    code
-    rate
 }
 }
 
@@ -166,8 +154,7 @@ goods_info .. goods_favorite : 1:1
 user_info .. shopping_cart : 1:N
 shopping_cart .. goods_info : 1:1
 
-user_info .. user_feedback : 1:1
-order_info .. user_feedback : 1:1
+user_info .. user_feedback : 1:N
 
 channel .. category : 1:N
 category .. category
